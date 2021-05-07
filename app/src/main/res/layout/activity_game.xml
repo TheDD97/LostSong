@@ -7,7 +7,7 @@
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="50dp" android:scrollbarAlwaysDrawHorizontalTrack="false">
         <ImageView
                 android:layout_width="80dp"
                 android:layout_height="wrap_content" app:srcCompat="@drawable/music_note"
@@ -47,242 +47,62 @@
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:gravity="center">
+            android:layout_height="match_parent" android:gravity="center|center_horizontal">
         <androidx.gridlayout.widget.GridLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" app:rowCount="11" app:columnCount="4"
-                android:layout_gravity="center">
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile00"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile01"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile02"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile03"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile10"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile11"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile12"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile13"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile20"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile21"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile22"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile23"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile30"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile31"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile32"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile33"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile40"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile41"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile42"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile43"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile50"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile51"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile52"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile53"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile60"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile61"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile62"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile63"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile70"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile71"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile72"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile73"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile80"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile81"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile82"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile83"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile90"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile91"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile92"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-            <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/tile" android:id="@+id/tile93"
-                    android:layout_marginRight="20dp" android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"/>
-
+                android:layout_height="wrap_content" app:rowCount="11" app:columnCount="6"
+                android:layout_gravity="center|center_horizontal" android:id="@+id/tileContainer">
         </androidx.gridlayout.widget.GridLayout>
         <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" app:srcCompat="@drawable/tapbar" android:id="@+id/tapBar"
-                android:layout_weight="1"/>
+                android:layout_height="wrap_content" app:srcCompat="@drawable/tap4" android:id="@+id/tapBar"
+                android:layout_weight="1"
+                android:baselineAlignBottom="false" android:scaleType="fitEnd"/>
         <androidx.gridlayout.widget.GridLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" app:rowCount="1" app:columnCount="4"
-                android:layout_gravity="center">
+                android:layout_height="wrap_content" app:rowCount="1" app:columnCount="6">
 
             <Button
-                    android:text="Button"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/button6"
-                    app:layout_gravity="center"
-                    android:width="80dp"/>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button0"
+                    android:width="80dp"
+                    android:height="20dp"
+                    android:layout_marginRight="5dp"
+            />
+            />
             <Button
-                    android:text="Button"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/button9"
-                    android:height="20dp" android:width="80dp"
-                    app:layout_gravity="center"/>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button1"
+                    android:height="20dp"
+                    android:width="80dp"
+                    android:layout_marginLeft="12dp" android:layout_marginRight="2dp"/>
             <Button
-                    android:text="Button"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/button10"
-                    android:height="20dp" android:width="80dp"
-                    app:layout_gravity="center"/>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button2"
+                    android:height="20dp"
+                    android:width="80dp" android:layout_marginLeft="10dp" android:layout_marginRight="2dp"/>
             <Button
-                    android:text="Button"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/button11"
-                    android:height="20dp" android:width="80dp"
-                    app:layout_gravity="center"/>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button3"
+                    android:height="20dp"
+                    android:width="80dp"
+                    android:layout_marginLeft="12dp" android:layout_marginRight="2dp"/>
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button4"
+                    android:width="80dp"
+                    android:height="20dp" android:layout_marginLeft="12dp" android:layout_marginRight="2dp"/>/>
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button5"
+                    android:width="80dp" android:height="20dp"
+                    android:layout_marginLeft="12dp" android:layout_marginRight="2dp"/>
         </androidx.gridlayout.widget.GridLayout>
     </LinearLayout>
 </LinearLayout>

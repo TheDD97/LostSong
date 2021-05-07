@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Home extends AppCompatActivity {
     private ImageButton imageButton;
      private LinearLayout layout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
