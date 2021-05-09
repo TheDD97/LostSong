@@ -1,4 +1,4 @@
-package com.example.lostsong;
+package com.domsLab.lostsong;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.example.lostsong;
+package com.domsLab.lostsong;
 
 import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;

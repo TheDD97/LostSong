@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
+              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent" android:orientation="vertical"
+              app:layout_constraintBottom_toTopOf="parent" app:layout_anchorGravity="center_horizontal">
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -44,23 +45,30 @@
                 android:layout_height="wrap_content" app:srcCompat="@android:drawable/ic_media_pause"
                 android:id="@+id/pauseButton" android:layout_weight="1"/>
     </LinearLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:id="@+id/gameLayout" android:foregroundGravity="center_horizontal"
+            android:layout_gravity="center_horizontal">
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:gravity="center|center_horizontal">
-        <androidx.gridlayout.widget.GridLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" app:rowCount="11" app:columnCount="6"
-                android:layout_gravity="center|center_horizontal" android:id="@+id/tileContainer">
-        </androidx.gridlayout.widget.GridLayout>
+            android:layout_height="match_parent">
         <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" app:srcCompat="@drawable/tap4" android:id="@+id/tapBar"
+                android:layout_height="0dp" app:srcCompat="@drawable/tap4" android:id="@+id/tapBar"
                 android:layout_weight="1"
-                android:baselineAlignBottom="false" android:scaleType="fitEnd"/>
+                android:scaleType="fitEnd"
+                android:layout_gravity="fill_horizontal"
+                android:baselineAlignBottom="false"
+        />
         <androidx.gridlayout.widget.GridLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" app:rowCount="1" app:columnCount="6">
+                android:layout_height="wrap_content" app:rowCount="1" app:columnCount="6" android:id="@+id/tapSection"
+                app:alignmentMode="alignMargins"
+                android:layout_gravity="center_horizontal" android:minHeight="50dp">
 
             <Button
                     android:layout_width="wrap_content"
@@ -68,41 +76,41 @@
                     android:id="@+id/button0"
                     android:width="80dp"
                     android:height="20dp"
-                    android:layout_marginRight="5dp"
-            />
-            />
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginLeft="5dp"/>
+
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/button1"
                     android:height="20dp"
                     android:width="80dp"
-                    android:layout_marginLeft="12dp" android:layout_marginRight="2dp"/>
+                    android:layout_marginStart="10dp" android:layout_marginEnd="2dp"/>
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/button2"
                     android:height="20dp"
-                    android:width="80dp" android:layout_marginLeft="10dp" android:layout_marginRight="2dp"/>
+                    android:width="80dp" android:layout_marginStart="10dp" android:layout_marginEnd="2dp"/>
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/button3"
                     android:height="20dp"
                     android:width="80dp"
-                    android:layout_marginLeft="12dp" android:layout_marginRight="2dp"/>
+                    android:layout_marginStart="12dp" android:layout_marginEnd="2dp"/>
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/button4"
                     android:width="80dp"
-                    android:height="20dp" android:layout_marginLeft="12dp" android:layout_marginRight="2dp"/>/>
+                    android:height="20dp" android:layout_marginStart="12dp" android:layout_marginEnd="2dp"/>/>
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/button5"
                     android:width="80dp" android:height="20dp"
-                    android:layout_marginLeft="12dp" android:layout_marginRight="2dp"/>
+                    android:layout_marginStart="12dp" android:layout_marginEnd="2dp"/>
         </androidx.gridlayout.widget.GridLayout>
     </LinearLayout>
 </LinearLayout>

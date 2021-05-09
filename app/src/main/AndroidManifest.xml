@@ -11,13 +11,13 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppFullScreenTheme">
 
-        <activity android:name=".Home">
+        <activity android:name="com.domsLab.lostsong.Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".GameScreen">
+        <activity android:name="com.domsLab.lostsong.GameScreen">
         </activity>
 
     </application>

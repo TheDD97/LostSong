@@ -1,0 +1,71 @@
+package model;
+
+
+public class Settings {
+
+    public static int rows = 6;
+    private boolean gameOver;
+    public float tileMovement;
+    public float tileHeight;
+    public static float verticalSpacing;
+    public float surfaceHeight;
+    private float density;
+
+    private static Settings instance = null;
+
+    public static int fps = 5;
+
+    public static Settings getInstance() {
+        if (instance == null)
+            instance = new Settings();
+        return instance;
+    }
+
+    private Settings() {
+    }
+
+    public void gameOver(boolean b) {
+        gameOver = b;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public void setDensity(float density) {
+        this.density = density;
+
+
+    }
+
+    public void setSurfaceHeight(float surfaceHeight) {
+        this.surfaceHeight = surfaceHeight;
+        System.out.println("SURFACE HEIGHT" + " " + surfaceHeight);
+        tileHeight = 10 * density;
+        verticalSpacing = surfaceHeight / 5; //5 + il numero di righe mostrate per volta
+        System.out.println(verticalSpacing);
+        tileMovement = verticalSpacing;
+    }
+
+    public float getTileMovement() {
+        return tileMovement;
+    }
+
+    public float getTileHeight() {
+        return tileHeight;
+    }
+
+    public float getVerticalSpacing() {
+        return verticalSpacing;
+    }
+
+    public float getDensity() {
+        return density;
+    }
+
+    public float getSurfaceHeight() {
+        return surfaceHeight;
+    }
+
+
+}

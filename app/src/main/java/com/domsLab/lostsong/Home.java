@@ -1,15 +1,15 @@
-package com.example.lostsong;
+package com.domsLab.lostsong;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.util.Log;
+import android.util.DisplayMetrics;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.lostsong.R;
+import model.Settings;
 
 public class Home extends AppCompatActivity {
     private ImageButton imageButton;
@@ -21,8 +21,6 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         imageButton = findViewById(R.id.goSongList);
         layout=findViewById(R.id.homeLayout);
-        System.out.println(layout.getWidth());
-        System.out.println(layout.getWidth());
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -30,6 +28,9 @@ public class Home extends AppCompatActivity {
             }
         });
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        DisplayMetrics dm= new DisplayMetrics();
+        System.out.println(getResources().getDisplayMetrics().density);
+        Settings.getInstance().setDensity(getResources().getDisplayMetrics().density);
 
     }
 
