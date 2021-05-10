@@ -28,13 +28,10 @@ public class Game {
         soundMap = new ArrayList<>();
         currentTiles = new ArrayList<>();
 
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 2; i++) {
             ArrayList<Tile> tmp = new ArrayList();
             for (int j = 0; j < 6; j++)
-                if (i % 4== 0)
                     tmp.add(new Tile(true));
-                else
-                    tmp.add(new Tile(false));
             soundMap.add(tmp);
         }
         for (final Button b : columnButton) {

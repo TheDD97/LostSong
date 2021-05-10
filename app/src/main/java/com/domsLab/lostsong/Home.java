@@ -1,6 +1,7 @@
 package com.domsLab.lostsong;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -13,14 +14,14 @@ import model.Settings;
 
 public class Home extends AppCompatActivity {
     private ImageButton imageButton;
-     private LinearLayout layout;
+    private LinearLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         imageButton = findViewById(R.id.goSongList);
-        layout=findViewById(R.id.homeLayout);
+        layout = findViewById(R.id.homeLayout);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,14 +29,16 @@ public class Home extends AppCompatActivity {
             }
         });
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        DisplayMetrics dm= new DisplayMetrics();
+        DisplayMetrics dm = new DisplayMetrics();
         System.out.println(getResources().getDisplayMetrics().density);
         Settings.getInstance().setDensity(getResources().getDisplayMetrics().density);
-
+        SharedPreferences.Editor editor = getSharedPreferences(TilesSurfaceView.settingName, MODE_PRIVATE).edit();
+        editor.putInt("Time", 0);
+        editor.apply();
     }
 
     private void launchListActivity() {
-        Intent intent = new Intent(this,GameScreen.class);
+        Intent intent = new Intent(this, GameScreen.class);
         startActivity(intent);
     }
 }

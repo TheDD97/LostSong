@@ -1,6 +1,7 @@
 package com.domsLab.lostsong;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.*;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
+    public static String settingName = "TilesSurfaceSetting";
     private static int refresh = 100;
     private SurfaceHolder surfaceHolder = null;
     private Paint paint = null;
@@ -25,15 +27,22 @@ public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callb
     private int currentRow = 0;
     private ConstraintLayout constraintLayout;
     private TextView name;
+    private boolean isRunning;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
     public TilesSurfaceView(Context context) {
         super(context);
         setFocusable(true);
+        isRunning = true;
         surfaceHolder = getHolder();
         surfaceHolder.addCallback(this);
         paint = new Paint();
         paint.setColor(Color.GRAY);
         tiles = new ArrayList<>();
+        gameThread = new Thread(this);
+        preferences = context.getSharedPreferences(settingName,Context.MODE_PRIVATE);
+        editor=preferences.edit();
     }
 
     public void setGame(Game g) {
@@ -43,7 +52,9 @@ public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callb
 
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
-        gameThread = new Thread(this);
+        isRunning = true;
+        if (gameThread.getState() == Thread.State.TERMINATED)
+            gameThread = new Thread(this);
         gameThread.start();
         paint.setColor(Color.BLACK);
     }
@@ -51,17 +62,25 @@ public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callb
 
     @Override
     public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
+
     }
 
     @Override
     public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-
+        isRunning = false;
+        try {
+            gameThread.join();
+            System.out.println("pause");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void drawTiles() {
 
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.deemo_wallpaper_19);
-        for (int k = 0; k < Settings.getInstance().getTileMovement() / Settings.fps / (Settings.getInstance().getDensity()) ; k++) {
+
+        for (int k = 0; k < Settings.getInstance().getTileMovement() / Settings.fps / (Settings.getInstance().getDensity()); k++) {
             Canvas canvas = surfaceHolder.lockCanvas();
             canvas.drawBitmap(bmp, 0, 0, null);
             for (int i = 0; i < tiles.size(); i++)
@@ -77,17 +96,21 @@ public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callb
     }
 
     @Override
-    public synchronized void run() {
-        int time = 0;
-        boolean finished = false;
+    public void run() {
+
+        int time = preferences.getInt("Time",0);
         Settings.getInstance().setSurfaceHeight(constraintLayout.getMeasuredHeight());
-        while (!finished) {
+        while (isRunning) {
+            editor.putInt("Time",time);
+            editor.apply();
+            System.out.println(time);
+            System.out.println("GO ON");
             try {
                 Thread.sleep(refresh);
-                if (time == 5 && !tiles.isEmpty()) {
+                if (time >= 5 && !tiles.isEmpty()) {
                     time = 4;
-                    for(int i =0;i<tiles.get(tiles.size()-1).size();i++)
-                        if (tiles.get(tiles.size()-1).get(i).isVisible())
+                    for (int i = 0; i < tiles.get(tiles.size() - 1).size(); i++)
+                        if (tiles.get(tiles.size() - 1).get(i).isVisible())
                             g.lostTile();
                     tiles.remove(tiles.size() - 1);
                 }
@@ -118,7 +141,6 @@ public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callb
     public void setSongView(TextView songName) {
         this.name = songName;
     }
-
 
 }
 
