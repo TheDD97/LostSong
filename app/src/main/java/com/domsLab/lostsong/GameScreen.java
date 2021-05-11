@@ -2,6 +2,7 @@ package com.domsLab.lostsong;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class GameScreen extends AppCompatActivity {
     private Game g;
     private ImageButton pauseButton;
     private MediaPlayer player;
+    private ScreenThread t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,6 @@ public class GameScreen extends AppCompatActivity {
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("sono in pausa");
                 Intent intent = new Intent(v.getContext(), PauseActivity.class);
                 startActivity(intent);
             }
@@ -45,6 +46,9 @@ public class GameScreen extends AppCompatActivity {
         charmingCount = findViewById(R.id.charmingCount);
         charmingCount.setText(Integer.toString(0));
         songName = findViewById(R.id.songName);
+        SharedPreferences sharedPreferences = getSharedPreferences(TilesSurfaceView.settingName, MODE_PRIVATE);
+        songName.setText(sharedPreferences.getString("SongName", "NOOOO"));
+
         tabBar = findViewById(R.id.tapBar);
         tilesSurfaceView = new TilesSurfaceView(getApplicationContext());
         layout = findViewById(R.id.gameLayout);
@@ -59,37 +63,14 @@ public class GameScreen extends AppCompatActivity {
         button3 = findViewById(R.id.button3);
         button4 = findViewById(R.id.button4);
         button5 = findViewById(R.id.button5);
-        tilesSurfaceView.setSongView(songName);
-        g = new Game(new ArrayList<Button>(Arrays.asList(button0, button1, button2, button3, button4, button5)));
+        g = Game.getInstance();
+        g.setMatrix(new ArrayList<Button>(Arrays.asList(button0, button1, button2, button3, button4, button5)));
         tilesSurfaceView.setGame(g);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION + View.SYSTEM_UI_FLAG_FULLSCREEN);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        Thread t = new Thread() {
-            @Override
-            public synchronized void run() {
-                super.run();
-                while (!Settings.getInstance().isGameOver()) {
-                    try {
-                        sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (g.upgradeCharminCount()) {
-                                int c = Integer.parseInt((String) charmingCount.getText());
-                                c++;
-                                charmingCount.setText(Integer.toString(c));
-                            } else charmingCount.setText(Integer.toString(0));
+        t = new ScreenThread();
 
-
-                        }
-                    });
-                }
-            }
-        };
-        player = MediaPlayer.create(getApplicationContext(),R.raw.megalovania);
+        player = MediaPlayer.create(getApplicationContext(), R.raw.megalovania);
         player.start();
     }
 
@@ -97,16 +78,51 @@ public class GameScreen extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         player.pause();
-        System.out.println("scree pause");
-
+        Settings.getInstance().setPause(true);
+        try {
+            t.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(player!=null && !player.isPlaying())
+        Settings.getInstance().setPause(false);
+        if (player != null && !player.isPlaying())
             player.start();
-        System.out.println("Screen resume");
+        if (t.getState() == Thread.State.TERMINATED)
+            t = new ScreenThread();
+
+        t.start();
+    }
+
+    private class ScreenThread extends Thread {
+        @Override
+        public void run() {
+            super.run();
+            while (!Settings.getInstance().pause()) {
+                try {
+                    sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (Game.getInstance().upgradeCharminCount() == 1) {
+                            int c = Integer.parseInt((String) charmingCount.getText());
+                            c++;
+                            charmingCount.setText(Integer.toString(c));
+                            Game.getInstance().restoreValue();
+                        } else if (Game.getInstance().upgradeCharminCount() == -1)
+                            charmingCount.setText(Integer.toString(0));
+                    }
+                });
+            }
+        }
 
     }
+
 }

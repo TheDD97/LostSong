@@ -15,6 +15,10 @@ public class Tile {
         return visible;
     }
 
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
     public float getSpeedAndIncrease() {
         if (speed>=Settings.getInstance().getTileMovement())
             speed=0;
@@ -24,5 +28,12 @@ public class Tile {
 
     public void resetIncrease() {
         speed=0;
+    }
+
+    @Override
+    public String toString() {
+        if (visible)
+            return "1";
+        else return "0";
     }
 }

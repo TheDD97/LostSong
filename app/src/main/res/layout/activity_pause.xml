@@ -15,6 +15,11 @@
             android:layout_gravity="center_horizontal|center_vertical">
 
         <TextView
+                android:text="@string/song_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/golist" android:layout_weight="1"
+                app:layout_gravity="center" android:textSize="18sp"/>
+        <TextView
                 android:text="@string/home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/home" android:layout_weight="1"

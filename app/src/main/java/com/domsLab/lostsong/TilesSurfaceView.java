@@ -16,17 +16,15 @@ import java.util.Arrays;
 
 public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
     public static String settingName = "TilesSurfaceSetting";
-    private static int refresh = 100;
+    private static int refresh = 330;
     private SurfaceHolder surfaceHolder = null;
     private Paint paint = null;
     private float tileX = 380, tileY = 0;
     private ArrayList<ArrayList<Tile>> tiles;
     private Thread gameThread;
     private Game g;
-    private int timeOut = 283 * refresh;
     private int currentRow = 0;
     private ConstraintLayout constraintLayout;
-    private TextView name;
     private boolean isRunning;
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
@@ -41,13 +39,12 @@ public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callb
         paint.setColor(Color.GRAY);
         tiles = new ArrayList<>();
         gameThread = new Thread(this);
-        preferences = context.getSharedPreferences(settingName,Context.MODE_PRIVATE);
-        editor=preferences.edit();
+        preferences = context.getSharedPreferences(settingName, Context.MODE_PRIVATE);
+        editor = preferences.edit();
     }
 
     public void setGame(Game g) {
         this.g = g;
-        name.setText(g.getName());
     }
 
     @Override
@@ -62,7 +59,10 @@ public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callb
 
     @Override
     public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-
+        if (gameThread.getState() == Thread.State.TERMINATED) {
+            gameThread = new Thread(this);
+            gameThread.start();
+        }
     }
 
     @Override
@@ -70,7 +70,6 @@ public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callb
         isRunning = false;
         try {
             gameThread.join();
-            System.out.println("pause");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -86,10 +85,9 @@ public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callb
             for (int i = 0; i < tiles.size(); i++)
                 for (int j = 0; j < tiles.get(i).size(); j++) {
                     float increase = tiles.get(i).get(j).getSpeedAndIncrease();
-                    if (tiles.get(i).get(j).isVisible())
-                        paint.setColor(Color.BLACK);
-                    else paint.setColor(Color.RED);
-                    canvas.drawRect(tileX + (260 * j), (Settings.getInstance().getVerticalSpacing() * i) + increase, tileX + 240 + (260 * j), Settings.getInstance().getTileHeight() + (i * Settings.getInstance().getVerticalSpacing()) + increase, paint);
+                    if (tiles.get(i).get(j).isVisible()) {
+                        canvas.drawRect(tileX + (260 * j), Settings.verticalSpacing + (Settings.getInstance().getVerticalSpacing() * i) + increase, tileX + 240 + (260 * j), Settings.verticalSpacing + Settings.getInstance().getTileHeight() + (i * Settings.getInstance().getVerticalSpacing()) + increase, paint);
+                    }
                 }
             surfaceHolder.unlockCanvasAndPost(canvas);
         }
@@ -98,20 +96,18 @@ public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callb
     @Override
     public void run() {
 
-        int time = preferences.getInt("Time",0);
+        int time = preferences.getInt("Time", 0);
         Settings.getInstance().setSurfaceHeight(constraintLayout.getMeasuredHeight());
-        while (isRunning) {
-            editor.putInt("Time",time);
+        while (isRunning && !Settings.getInstance().pause()) {
+            editor.putInt("Time", time);
             editor.apply();
-            System.out.println(time);
-            System.out.println("GO ON");
             try {
                 Thread.sleep(refresh);
                 if (time >= 5 && !tiles.isEmpty()) {
                     time = 4;
-                    for (int i = 0; i < tiles.get(tiles.size() - 1).size(); i++)
+                    /*for (int i = 0; i < tiles.get(tiles.size() - 1).size(); i++)
                         if (tiles.get(tiles.size() - 1).get(i).isVisible())
-                            g.lostTile();
+                            g.lostTile();*/
                     tiles.remove(tiles.size() - 1);
                 }
                 if (tiles.size() < 5 || tiles.isEmpty()) {
@@ -120,13 +116,15 @@ public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callb
                         currentRow++;
                     } else
                         tiles.add(0, new ArrayList<Tile>(Arrays.asList(new Tile(false), new Tile(false), new Tile(false), new Tile(false), new Tile(false), new Tile(false))));
-                    g.setCurrentMap(tiles);
+
                     for (int i = 0; i < tiles.size(); i++)
                         for (int j = 0; j < tiles.get(i).size(); j++)
                             tiles.get(i).get(j).resetIncrease();
+
                 }
+                g.setCurrentMap(tiles);
+                tiles = g.getCheckedTiles();
                 drawTiles();
-                g.upgradeCharminCount();
                 time++;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -138,9 +136,6 @@ public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callb
         constraintLayout = layout;
     }
 
-    public void setSongView(TextView songName) {
-        this.name = songName;
-    }
 
 }
 

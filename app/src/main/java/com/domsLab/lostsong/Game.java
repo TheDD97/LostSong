@@ -1,5 +1,7 @@
 package com.domsLab.lostsong;
 
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,26 +18,35 @@ public class Game {
     private ArrayList<Button> columnButton;
     private int charmingHitsCounter;
     private String songName;
-    private boolean value;
+    private int value = 0; // -1 reset 0 none 1 add
     private int lastRow;
+    private static Game instance = null;
+    public static Game getInstance() {
+        if (instance == null)
+            instance = new Game();
+        return instance;
+    }
 
-    public Game(ArrayList<Button> buttons) {
+    private Game() {
+
+    }
+
+    public void setMatrix(ArrayList<Button> buttons) {
         Settings.getInstance().gameOver(false);
-        value = false;
-        songName = "Fatti i cazzi tuoi ca campi cent'anni";
         charmingHitsCounter = 0;
         columnButton = buttons;
+        value = -1;
         soundMap = new ArrayList<>();
         currentTiles = new ArrayList<>();
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 10; i++) {
             ArrayList<Tile> tmp = new ArrayList();
             for (int j = 0; j < 6; j++)
-                    tmp.add(new Tile(true));
+                tmp.add(new Tile(true));
             soundMap.add(tmp);
         }
         for (final Button b : columnButton) {
-            //  b.setBackgroundColor(Color.TRANSPARENT);
+            b.setBackgroundColor(Color.TRANSPARENT);
             b.setWidth(180);
             b.cancelLongPress();
             b.setOnClickListener(new View.OnClickListener() {
@@ -43,13 +54,13 @@ public class Game {
                 public void onClick(View v) {
                     String name = b.getResources().getResourceName(b.getId());
                     char n = name.charAt(name.length() - 1);
-                    System.out.println("NAME " + n);
-
-                    if (currentTiles.size() == 5) {
-                        Tile t = new Tile(currentTiles.get(Settings.rows - 2).get(Integer.parseInt(String.valueOf(n))).isVisible());
+                    if (currentTiles.size() >= 4) {
+                        Tile t = new Tile(currentTiles.get(currentTiles.size() - 1).get(Integer.parseInt(String.valueOf(n))).isVisible());
                         if (t.isVisible()) {
-                            value = true;
-                        } else value = false;
+                            value = 1;
+                            currentTiles.get(currentTiles.size()-1).get(Integer.parseInt(String.valueOf(n))).setVisible(false);
+                            System.out.println(value);
+                        }
                     }
                 }
             });
@@ -71,9 +82,9 @@ public class Game {
             currentTiles = tiles;
         else {
             boolean ck = false;
-            for (int i = 0; i < soundMap.size(); i++) {
-                for (int j = 0; j < soundMap.get(i).size(); j++) {
-                    if (soundMap.get(i).get(j).isVisible()) {
+            for (int i = 0; i < tiles.size(); i++) {
+                for (int j = 0; j < tiles.get(i).size(); j++) {
+                    if (tiles.get(i).get(j).isVisible()) {
                         ck = true;
                     }
                 }
@@ -83,15 +94,20 @@ public class Game {
         }
     }
 
-    public boolean upgradeCharminCount() {
-       return value;
+    public synchronized int upgradeCharminCount() {
+        return value;
 
+    }
+    public void restoreValue(){
+        value=0;
     }
     public void lostTile() {
-        value = false;
+        value = -1;
     }
 
-    public String getName() {
-        return songName;
+
+    public ArrayList<ArrayList<Tile>> getCheckedTiles() {
+
+        return currentTiles;
     }
 }

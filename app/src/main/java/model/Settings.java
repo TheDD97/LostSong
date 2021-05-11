@@ -3,7 +3,7 @@ package model;
 
 public class Settings {
 
-    public static int rows = 6;
+    public static int rows = 5;
     private boolean gameOver;
     public float tileMovement;
     public float tileHeight;
@@ -14,6 +14,7 @@ public class Settings {
     private static Settings instance = null;
 
     public static int fps = 5;
+    private boolean pause;
 
     public static Settings getInstance() {
         if (instance == null)
@@ -68,4 +69,10 @@ public class Settings {
     }
 
 
+    public boolean pause() {
+        return pause;
+    }
+    public void setPause(Boolean  p){
+        pause=p;
+    }
 }
