@@ -25,12 +25,12 @@ public class Song {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (ArrayList<Tile> tile : tiles) {
-            StringBuilder s = new StringBuilder();
-            for (Tile tile1 : tile) {
-                s.append(tile1.toString());
+        for (int i = tiles.size()-1; i>=0;i--) {
+
+            for (int j =0;j<tiles.get(i).size();j++) {
+               stringBuilder.append(tiles.get(i).get(j).toString());
             }
-            stringBuilder.insert(0,s);
+
         }
         return stringBuilder.toString();
     }

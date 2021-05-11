@@ -28,9 +28,12 @@ public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callb
     private boolean isRunning;
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
-
+    private DatabaseHelper db;
+    private String map;
     public TilesSurfaceView(Context context) {
         super(context);
+        db = new DatabaseHelper(context);
+        map = db.getData("3KKK");
         setFocusable(true);
         isRunning = true;
         surfaceHolder = getHolder();
@@ -45,6 +48,18 @@ public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callb
 
     public void setGame(Game g) {
         this.g = g;
+        ArrayList<ArrayList<Tile>>soundMap = new ArrayList<>();
+        for (int i = 0; i < map.length(); i+=6) {
+            ArrayList<Tile> tmp = new ArrayList<>();
+            for (int j = i + 0; j < i+6; j++){
+                System.out.println(Integer.parseInt(String.valueOf(map.charAt(j))));
+                if (Integer.parseInt(String.valueOf(map.charAt(j))) == 0)
+                    tmp.add(new Tile(false));
+                else tmp.add(new Tile(true));
+            }
+            soundMap.add(tmp);
+        }
+        g.setSoundMap(soundMap);
     }
 
     @Override
@@ -86,8 +101,11 @@ public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callb
                 for (int j = 0; j < tiles.get(i).size(); j++) {
                     float increase = tiles.get(i).get(j).getSpeedAndIncrease();
                     if (tiles.get(i).get(j).isVisible()) {
-                        canvas.drawRect(tileX + (260 * j), Settings.verticalSpacing + (Settings.getInstance().getVerticalSpacing() * i) + increase, tileX + 240 + (260 * j), Settings.verticalSpacing + Settings.getInstance().getTileHeight() + (i * Settings.getInstance().getVerticalSpacing()) + increase, paint);
-                    }
+                        paint.setColor(Color.BLACK);
+                        }
+                    else paint.setColor(Color.RED);
+                    canvas.drawRect(tileX + (260 * j), Settings.verticalSpacing + (Settings.getInstance().getVerticalSpacing() * i) + increase, tileX + 240 + (260 * j), Settings.verticalSpacing + Settings.getInstance().getTileHeight() + (i * Settings.getInstance().getVerticalSpacing()) + increase, paint);
+
                 }
             surfaceHolder.unlockCanvasAndPost(canvas);
         }

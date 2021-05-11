@@ -38,7 +38,9 @@ public class DBManager extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_NAME, COLUMNS, " name = ?", new String[]{name}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
+        System.out.println(cursor.getCount());
         String map = cursor.getString(1);
+
         ArrayList<ArrayList<Tile>> soundTiles = new ArrayList<>();
         for (int i = 0; i < map.length(); i += 6) {
             ArrayList<Tile> tmp = new ArrayList<>();

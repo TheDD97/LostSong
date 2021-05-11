@@ -21,6 +21,8 @@ public class Game {
     private int value = 0; // -1 reset 0 none 1 add
     private int lastRow;
     private static Game instance = null;
+    public boolean ready=false;
+
     public static Game getInstance() {
         if (instance == null)
             instance = new Game();
@@ -58,7 +60,7 @@ public class Game {
                         Tile t = new Tile(currentTiles.get(currentTiles.size() - 1).get(Integer.parseInt(String.valueOf(n))).isVisible());
                         if (t.isVisible()) {
                             value = 1;
-                            currentTiles.get(currentTiles.size()-1).get(Integer.parseInt(String.valueOf(n))).setVisible(false);
+                            currentTiles.get(currentTiles.size() - 1).get(Integer.parseInt(String.valueOf(n))).setVisible(false);
                             System.out.println(value);
                         }
                     }
@@ -98,9 +100,11 @@ public class Game {
         return value;
 
     }
-    public void restoreValue(){
-        value=0;
+
+    public void restoreValue() {
+        value = 0;
     }
+
     public void lostTile() {
         value = -1;
     }
@@ -109,5 +113,11 @@ public class Game {
     public ArrayList<ArrayList<Tile>> getCheckedTiles() {
 
         return currentTiles;
+    }
+
+    public void setSoundMap(ArrayList<ArrayList<Tile>> map) {
+        soundMap = map;
+        ready=true;
+
     }
 }

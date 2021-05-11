@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,7 @@ import model.Settings;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
 
 public class GameScreen extends AppCompatActivity {
     private ImageView tabBar;
@@ -48,7 +50,7 @@ public class GameScreen extends AppCompatActivity {
         songName = findViewById(R.id.songName);
         SharedPreferences sharedPreferences = getSharedPreferences(TilesSurfaceView.settingName, MODE_PRIVATE);
         songName.setText(sharedPreferences.getString("SongName", "NOOOO"));
-
+        int pos = sharedPreferences.getInt("position",1);
         tabBar = findViewById(R.id.tapBar);
         tilesSurfaceView = new TilesSurfaceView(getApplicationContext());
         layout = findViewById(R.id.gameLayout);
@@ -69,9 +71,12 @@ public class GameScreen extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION + View.SYSTEM_UI_FLAG_FULLSCREEN);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         t = new ScreenThread();
+        System.out.println(pos);
+        int id = this.getResources().getIdentifier("track"+pos,"raw",this.getPackageName());
+        player = MediaPlayer.create(getApplicationContext(), id);
 
-        player = MediaPlayer.create(getApplicationContext(), R.raw.megalovania);
-        player.start();
+
+        //player.start();
     }
 
     @Override
@@ -90,12 +95,12 @@ public class GameScreen extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Settings.getInstance().setPause(false);
-        if (player != null && !player.isPlaying())
+        if (player != null && !player.isPlaying() && Game.getInstance().ready)
             player.start();
         if (t.getState() == Thread.State.TERMINATED)
             t = new ScreenThread();
-
-        t.start();
+        if(Game.getInstance().ready)
+            t.start();
     }
 
     private class ScreenThread extends Thread {
