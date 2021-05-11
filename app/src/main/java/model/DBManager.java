@@ -49,12 +49,13 @@ public class DBManager extends SQLiteOpenHelper {
                     tmp.add(new Tile(false));
                 else tmp.add(new Tile(true));
             }
-            soundTiles.add(0,tmp);
+            soundTiles.add(0, tmp);
         }
         return soundTiles;
 
     }
-    public void addSong(Song song){
+
+    public void addSong(Song song) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME, COLUMNS, " name = ?", new String[]{song.getName()}, null, null, null, null);
         if (cursor != null) {
@@ -64,9 +65,9 @@ public class DBManager extends SQLiteOpenHelper {
         System.out.println("og no");
         db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(PK,song.getName());
-        values.put(TILES,song.toString());
-        db.insert(TABLE_NAME,null,values);
+        values.put(PK, song.getName());
+        values.put(TILES, song.toString());
+        db.insert(TABLE_NAME, null, values);
         db.close();
     }
 }

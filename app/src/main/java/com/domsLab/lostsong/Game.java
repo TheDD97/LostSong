@@ -21,7 +21,7 @@ public class Game {
     private int value = 0; // -1 reset 0 none 1 add
     private int lastRow;
     private static Game instance = null;
-    public boolean ready=false;
+    public boolean ready = false;
 
     public static Game getInstance() {
         if (instance == null)
@@ -117,7 +117,7 @@ public class Game {
 
     public void setSoundMap(ArrayList<ArrayList<Tile>> map) {
         soundMap = map;
-        ready=true;
+        ready = true;
 
     }
 }

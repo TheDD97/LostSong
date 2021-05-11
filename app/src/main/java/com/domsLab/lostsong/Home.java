@@ -44,7 +44,7 @@ public class Home extends AppCompatActivity {
                 else tmp.add(new Tile(false));
             soundMap.add(tmp);
         }
-        Song s = new Song("3KKK",soundMap);
+        Song s = new Song("3KKK", soundMap);
         Boolean b = db.addData(s);
         System.out.println(s.toString());
 

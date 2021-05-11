@@ -48,7 +48,7 @@ public class SongList extends AppCompatActivity implements SongAdapter.OnSongLis
 
         SharedPreferences.Editor editor = getSharedPreferences(TilesSurfaceView.settingName, MODE_PRIVATE).edit();
         editor.putString("SongName", songCards.get(position).getSongName());
-        editor.putInt("position",position);
+        editor.putInt("position", position);
         editor.apply();
         Intent intent = new Intent(this, GameScreen.class);
         startActivity(intent);

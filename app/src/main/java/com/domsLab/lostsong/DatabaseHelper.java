@@ -43,7 +43,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public String getData(String name) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "Select * from " + TABLE_NAME +" where name = ?";
+        String query = "Select * from " + TABLE_NAME + " where name = ?";
         Cursor cursor = db.rawQuery(query, new String[]{name});
         cursor.moveToFirst();
         return cursor.getString(1);

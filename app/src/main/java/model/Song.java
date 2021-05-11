@@ -6,8 +6,8 @@ public class Song {
     private String name;
     private ArrayList<ArrayList<Tile>> tiles;
 
-    public Song(String name,ArrayList<ArrayList<Tile>> tiles) {
-        this.name=name;
+    public Song(String name, ArrayList<ArrayList<Tile>> tiles) {
+        this.name = name;
         this.tiles = tiles;
     }
 
@@ -18,17 +18,18 @@ public class Song {
     public void setTiles(ArrayList<ArrayList<Tile>> tiles) {
         this.tiles = tiles;
     }
-    public void addRow(ArrayList<Tile> row){
-        tiles.add(0,row);
+
+    public void addRow(ArrayList<Tile> row) {
+        tiles.add(0, row);
     }
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = tiles.size()-1; i>=0;i--) {
+        for (int i = tiles.size() - 1; i >= 0; i--) {
 
-            for (int j =0;j<tiles.get(i).size();j++) {
-               stringBuilder.append(tiles.get(i).get(j).toString());
+            for (int j = 0; j < tiles.get(i).size(); j++) {
+                stringBuilder.append(tiles.get(i).get(j).toString());
             }
 
         }

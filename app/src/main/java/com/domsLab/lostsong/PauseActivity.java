@@ -23,7 +23,7 @@ public class PauseActivity extends AppCompatActivity {
         songList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),SongList.class);
+                Intent intent = new Intent(v.getContext(), SongList.class);
                 startActivity(intent);
             }
         });

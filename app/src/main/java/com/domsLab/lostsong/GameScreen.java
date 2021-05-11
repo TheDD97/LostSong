@@ -50,7 +50,7 @@ public class GameScreen extends AppCompatActivity {
         songName = findViewById(R.id.songName);
         SharedPreferences sharedPreferences = getSharedPreferences(TilesSurfaceView.settingName, MODE_PRIVATE);
         songName.setText(sharedPreferences.getString("SongName", "NOOOO"));
-        int pos = sharedPreferences.getInt("position",1);
+        int pos = sharedPreferences.getInt("position", 1);
         tabBar = findViewById(R.id.tapBar);
         tilesSurfaceView = new TilesSurfaceView(getApplicationContext());
         layout = findViewById(R.id.gameLayout);
@@ -72,7 +72,7 @@ public class GameScreen extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         t = new ScreenThread();
         System.out.println(pos);
-        int id = this.getResources().getIdentifier("track"+pos,"raw",this.getPackageName());
+        int id = this.getResources().getIdentifier("track" + pos, "raw", this.getPackageName());
         player = MediaPlayer.create(getApplicationContext(), id);
 
 
@@ -99,7 +99,7 @@ public class GameScreen extends AppCompatActivity {
             player.start();
         if (t.getState() == Thread.State.TERMINATED)
             t = new ScreenThread();
-        if(Game.getInstance().ready)
+        if (Game.getInstance().ready)
             t.start();
     }
 

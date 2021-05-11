@@ -20,14 +20,14 @@ public class Tile {
     }
 
     public float getSpeedAndIncrease() {
-        if (speed>=Settings.getInstance().getTileMovement())
-            speed=0;
-        return speed+=Settings.fps*Settings.getInstance().getDensity();
+        if (speed >= Settings.getInstance().getTileMovement())
+            speed = 0;
+        return speed += Settings.fps * Settings.getInstance().getDensity();
     }
 
 
     public void resetIncrease() {
-        speed=0;
+        speed = 0;
     }
 
     @Override

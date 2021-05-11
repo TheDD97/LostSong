@@ -72,7 +72,8 @@ public class Settings {
     public boolean pause() {
         return pause;
     }
-    public void setPause(Boolean  p){
-        pause=p;
+
+    public void setPause(Boolean p) {
+        pause = p;
     }
 }
