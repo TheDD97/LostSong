@@ -42,7 +42,6 @@ public class Settings {
 
     public void setSurfaceHeight(float surfaceHeight) {
         this.surfaceHeight = surfaceHeight;
-        System.out.println("SURFACE HEIGHT" + " " + surfaceHeight);
         tileHeight = 10 * density;
         verticalSpacing = surfaceHeight / 5; //5 + il numero di righe mostrate per volta
         System.out.println(verticalSpacing);
