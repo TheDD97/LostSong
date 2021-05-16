@@ -6,14 +6,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_gravity="center"
-        android:padding="10dp"
-        tools:context="com.domsLab.lostsong.SongList" android:background="#E3A527">
+        tools:context="com.domslab.lostsong.view.SongList" android:background="@drawable/song_list_bkg"
+        android:layout_centerHorizontal="true">
     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-              android:text="Provaaaaaaaaaaaa" android:textSize="20sp" android:textStyle="bold"/>
+              android:text="@string/select_a_song" android:textSize="20sp" android:textStyle="bold"
+              android:textAlignment="center" android:background="#8B0B0909"
+              android:fontFamily="@font/rocknroll_typo_regular"/>
     <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/song_list_view"
-            android:layout_marginTop="10dp"/>
+            android:layout_weight="-1" android:background="#8B0B0909"/>
 </LinearLayout>

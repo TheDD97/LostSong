@@ -7,23 +7,27 @@
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
-            android:screenOrientation="landscape"
+            android:screenOrientation="sensorLandscape"
             android:supportsRtl="true"
-            android:theme="@style/AppFullScreenTheme">
-        <activity android:name="com.domsLab.lostsong.SongList">
+            android:theme="@style/AppFullScreenTheme"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+        <activity android:name="com.domslab.lostsong.view.SongList">
 
         </activity>
-        <activity android:name="com.domsLab.lostsong.PauseActivity"  >
-<!--            android:theme="@style/Theme.AppCompat.Light.Dialog"-->
+        <activity android:name="com.domslab.lostsong.view.PauseActivity">
+
         </activity>
-        <activity android:name="com.domsLab.lostsong.Home">
+        <activity android:name="com.domslab.lostsong.view.Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.domsLab.lostsong.GameScreen">
+        <activity android:name="com.domslab.lostsong.view.GameScreen">
+        </activity>
+        <activity android:name="com.domslab.lostsong.view.ScoreScreen">
+
         </activity>
     </application>
 
