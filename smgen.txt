@@ -1,2 +1,3 @@
-ft +45
-vivy +25
+dream - 85
+ft + 45
+vivy + 25

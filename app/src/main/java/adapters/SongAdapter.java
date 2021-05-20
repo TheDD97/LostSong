@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.lostsong.R;
-import com.domslab.model.SongCard;
+import com.domslab.lostsong.model.SongCard;
 
 import java.util.ArrayList;
 

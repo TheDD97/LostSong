@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.lostsong.R;
 import com.domslab.lostsong.database.DbManager;
-import com.domslab.model.Game;
-import com.domslab.model.SongCard;
+import com.domslab.lostsong.model.Game;
+import com.domslab.lostsong.model.SongCard;
 import adapters.SongAdapter;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.domslab.model;
+package com.domslab.lostsong.model;
 
 import android.graphics.Color;
 import android.view.View;
@@ -26,7 +26,6 @@ public class Game {
     }
 
     public void setMatrix(ArrayList<Button> buttons) {
-
         columnButton = buttons;
         value = -1;
         currentTiles = new ArrayList<>();

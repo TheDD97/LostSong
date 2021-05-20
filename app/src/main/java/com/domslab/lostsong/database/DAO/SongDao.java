@@ -3,7 +3,7 @@ package com.domslab.lostsong.database.DAO;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
-import com.domslab.model.Song;
+import com.domslab.lostsong.model.Song;
 
 import java.util.List;
 

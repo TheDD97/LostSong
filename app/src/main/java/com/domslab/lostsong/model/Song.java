@@ -1,4 +1,4 @@
-package com.domslab.model;
+package com.domslab.lostsong.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;

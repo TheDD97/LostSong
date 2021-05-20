@@ -1,4 +1,4 @@
-package com.domslab.model;
+package com.domslab.lostsong.model;
 
 public class SongCard {
     private Integer songLogo;

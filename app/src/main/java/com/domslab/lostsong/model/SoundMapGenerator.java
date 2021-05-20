@@ -1,4 +1,4 @@
-package com.domslab.model;
+package com.domslab.lostsong.model;
 
 import com.domslab.lostsong.view.TilesSurfaceView;
 
@@ -13,7 +13,6 @@ public class SoundMapGenerator {
     }
     public void generateSoundMap(){
         float rest = duration%TilesSurfaceView.refresh;
-       // System.out.println(rest);
         int numRow = (int) (duration/(TilesSurfaceView.refresh+rest));
         Random r = new Random();
         System.out.println(numRow);
@@ -21,7 +20,7 @@ public class SoundMapGenerator {
         for (int i = 0; i < possibleRows.length; i++) {
             System.out.println(possibleRows[i]);
         }
-        for (int i=0;i<numRow+45;i++){
+        for (int i=0;i<numRow-85;i++){
             soundMap.append(possibleRows[r.nextInt(possibleRows.length)]);
         }
         System.out.println("SOUND MAP "+sound);

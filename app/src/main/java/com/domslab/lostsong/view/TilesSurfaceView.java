@@ -6,10 +6,9 @@ import android.graphics.*;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import com.example.lostsong.R;
-import com.domslab.model.Game;
-import com.domslab.model.Settings;
-import com.domslab.model.Tile;
+import com.domslab.lostsong.model.Game;
+import com.domslab.lostsong.model.Settings;
+import com.domslab.lostsong.model.Tile;
 
 import java.util.ArrayList;
 import java.util.Arrays;

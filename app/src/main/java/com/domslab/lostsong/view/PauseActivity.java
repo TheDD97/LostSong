@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.domslab.lostsong.model.Settings;
 import com.example.lostsong.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -47,6 +48,7 @@ public class PauseActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = getSharedPreferences(TilesSurfaceView.settingName, MODE_PRIVATE).edit();
                 editor.putInt("Time", 0);
                 editor.apply();
+                Settings.getInstance().gameOver(false);
                 Intent intent = new Intent(v.getContext(), GameScreen.class);
                 startActivity(intent);
             }

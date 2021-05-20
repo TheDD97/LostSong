@@ -5,7 +5,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import com.domslab.lostsong.database.DAO.SongDao;
-import com.domslab.model.Song;
+import com.domslab.lostsong.model.Song;
 
 @Database(entities = {Song.class}, version = 1, exportSchema = true)
 public abstract class DbManager extends RoomDatabase {
