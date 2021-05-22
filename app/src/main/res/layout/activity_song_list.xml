@@ -9,7 +9,7 @@
         tools:context="com.domslab.lostsong.view.SongList" android:background="@drawable/song_list_bkg"
         android:layout_centerHorizontal="true">
     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-              android:text="@string/select_a_song" android:textSize="20sp" android:textStyle="bold"
+              android:text="@string/select_a_song" android:textSize="34sp" android:textStyle="bold"
               android:textAlignment="center" android:background="#8B0B0909"
               android:fontFamily="@font/rocknroll_typo_regular"/>
     <androidx.recyclerview.widget.RecyclerView

@@ -3,18 +3,16 @@ package com.domslab.lostsong.view;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.view.ViewGroup;
+import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.gridlayout.widget.GridLayout;
 import com.example.lostsong.R;
 import com.domslab.lostsong.model.Game;
 import com.domslab.lostsong.model.Settings;
@@ -30,20 +28,20 @@ public class GameScreen extends AppCompatActivity {
     private Button button0, button1, button2, button3, button4, button5;
     private ConstraintLayout layout;
     private TilesSurfaceView tilesSurfaceView;
-    private TextView songName, charmingCount;
+    private TextView songName, charmingCount, tilesHitted;
     private Game g;
     private ImageButton pauseButton;
     private MediaPlayer player;
     private ScreenThread t;
     private SharedPreferences sharedPreferences;
-    private int tilesHitted;
+    private GridLayout gridLayout;
+    private boolean firstRun = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Settings.getInstance().gameOver(false);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION + View.SYSTEM_UI_FLAG_FULLSCREEN);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         pauseButton = findViewById(R.id.pauseButton);
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,9 +51,10 @@ public class GameScreen extends AppCompatActivity {
             }
         });
         charmingCount = findViewById(R.id.charmingCount);
+        tilesHitted = findViewById(R.id.tiles_hitted);
         if (savedInstanceState != null) {
             charmingCount.setText(Integer.toString(savedInstanceState.getInt(COUNTER_EXTRA, 0)));
-            tilesHitted = savedInstanceState.getInt(GAME_SCORE, 0);
+            tilesHitted.setText(Integer.toString(savedInstanceState.getInt(GAME_SCORE, 0)));
         } else
             charmingCount.setText(Integer.toString(0));
         songName = findViewById(R.id.songName);
@@ -63,6 +62,7 @@ public class GameScreen extends AppCompatActivity {
         songName.setText(sharedPreferences.getString("SongName", "NOOOO"));
         int pos = sharedPreferences.getInt("position", 1);
         tabBar = findViewById(R.id.tapBar);
+        gridLayout = findViewById(R.id.tapSection);
         button0 = findViewById(R.id.button0);
         button1 = findViewById(R.id.button1);
         button2 = findViewById(R.id.button2);
@@ -112,12 +112,35 @@ public class GameScreen extends AppCompatActivity {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(COUNTER_EXTRA, Integer.parseInt(charmingCount.getText().toString()));
-        outState.putInt(GAME_SCORE, tilesHitted);
+        outState.putInt(GAME_SCORE, Integer.parseInt(tilesHitted.getText().toString()));
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            hideSystemUI();
+        }
+    }
+
+    private void hideSystemUI() {
+        // Enable sticky immersive mode.
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        // Set the content to appear under the system bars so that the
+                        // content doesn't resize when the system bars hide and show.
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN);
     }
 
     private class ScreenThread extends Thread {
         @Override
         public void run() {
+
             super.run();
             while (!Settings.getInstance().pause()) {
                 try {
@@ -128,22 +151,30 @@ public class GameScreen extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        if (firstRun) {
+                            g.setButtonWidth((int) Settings.tileWidth);
+                            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) gridLayout.getLayoutParams();
+                            params.setMargins((int) Settings.getInstance().getPaddingLeft(), 0, (int) Settings.getInstance().getPaddingLeft(), 0);
+                            gridLayout.requestLayout();
+                            firstRun = false;
+                        }
                         if (Settings.getInstance().isGameOver()) {
-                            finish();
                             SharedPreferences.Editor editor = getSharedPreferences(GAME_SCORE, MODE_PRIVATE).edit();
                             SharedPreferences pref = getSharedPreferences(GAME_SCORE, MODE_PRIVATE);
-                            editor.putInt("current_score_" + sharedPreferences.getString("SongName", ""), tilesHitted);
+                            editor.putInt("current_score_" + sharedPreferences.getString("SongName", ""), Integer.parseInt(tilesHitted.getText().toString()));
                             int highscore = pref.getInt("current_score_" + sharedPreferences.getString("SongName", ""), 0);
-                            if (highscore < tilesHitted)
-                                editor.putInt("high_score_" + sharedPreferences.getString("SongName", ""), tilesHitted);
+                            if (highscore < Integer.parseInt(tilesHitted.getText().toString()))
+                                editor.putInt("high_score_" + sharedPreferences.getString("SongName", ""), Integer.parseInt(tilesHitted.getText().toString()));
                             editor.apply();
+                            finish();
                             Intent intent = new Intent(getApplicationContext(), ScoreScreen.class);
                             startActivity(intent);
                         }
                         if (Game.getInstance().upgradeCharminCount() == 1) {
                             int c = Integer.parseInt((String) charmingCount.getText());
                             c++;
-                            tilesHitted++;
+                            int th = Integer.parseInt(tilesHitted.getText().toString());
+                            tilesHitted.setText(Integer.toString(++th));
                             charmingCount.setText(Integer.toString(c));
                             Game.getInstance().restoreValue();
                         } else if (Game.getInstance().upgradeCharminCount() == -1)
@@ -154,5 +185,4 @@ public class GameScreen extends AppCompatActivity {
         }
 
     }
-
 }

@@ -9,7 +9,7 @@
             android:id="@+id/goSongList"
             android:layout_weight="1"
             android:layout_height="250dp"
-            android:layout_width="250dp" android:scaleType="centerCrop" android:background="@drawable/gamelogo"
+            android:layout_width="300dp" android:scaleType="fitCenter" android:background="@drawable/gamelogo"
             android:layout_marginTop="10dp"/>
     <TextView
             android:text="Tap the image to continue"

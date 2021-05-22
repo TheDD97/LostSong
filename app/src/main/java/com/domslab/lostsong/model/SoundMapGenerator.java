@@ -15,15 +15,10 @@ public class SoundMapGenerator {
         float rest = duration%TilesSurfaceView.refresh;
         int numRow = (int) (duration/(TilesSurfaceView.refresh+rest));
         Random r = new Random();
-        System.out.println(numRow);
         StringBuilder soundMap= new StringBuilder();
-        for (int i = 0; i < possibleRows.length; i++) {
-            System.out.println(possibleRows[i]);
-        }
-        for (int i=0;i<numRow-85;i++){
+        for (int i=0;i<numRow-45;i++){
             soundMap.append(possibleRows[r.nextInt(possibleRows.length)]);
         }
-        System.out.println("SOUND MAP "+sound);
         this.sound=soundMap.toString();
     }
     public String getMap(){

@@ -22,7 +22,7 @@ public class Song {
         this.name = name;
         this.tiles = tiles;
         soundMap = new ArrayList<>();
-        System.out.println(tiles);
+        //System.out.println(tiles);
         for (int i = tiles.length() - 1; i >= 0; i -= 6) {
             ArrayList<Tile> tmp = new ArrayList();
             for (int j = i; j > i - 6; j--)
@@ -48,10 +48,6 @@ public class Song {
 
     public void setTiles(ArrayList<ArrayList<Tile>> tiles) {
         this.tiles = tiles.toString();
-    }
-
-    public void addRow(ArrayList<Tile> row) {
-        soundMap.add(0, row);
     }
 
     @Override

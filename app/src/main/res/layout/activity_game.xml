@@ -5,8 +5,8 @@
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
                                                    app:layout_constraintBottom_toTopOf="parent"
-                                                   app:layout_anchorGravity="center_horizontal"
-                                                   android:id="@+id/main" app:layout_goneMarginBottom="0dp">
+                                                   android:id="@+id/main" app:layout_goneMarginBottom="0dp"
+                                                   app:layout_anchorGravity="center_horizontal">
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="0dp"
@@ -45,6 +45,21 @@
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:text="Tiles Hitted: "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:layout_weight="1"
+                        android:fontFamily="@font/rocknroll_typo_regular" android:textSize="24sp"/>
+                <TextView
+                        android:text="0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/tiles_hitted" android:layout_weight="1"
+                        android:fontFamily="@font/rocknroll_typo_regular" android:textSize="24sp"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_gravity="right" android:layout_weight="1">
                 <TextView
@@ -70,7 +85,8 @@
             android:layout_height="0dp"
             android:id="@+id/gameLayout" android:foregroundGravity="center_horizontal"
             app:layout_constraintTop_toBottomOf="@id/topSection" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/downSection" app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintBottom_toTopOf="@id/downSection" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" app:layout_constraintRight_toRightOf="parent">
     </androidx.constraintlayout.widget.ConstraintLayout>
     <LinearLayout
             android:orientation="vertical"
@@ -91,54 +107,48 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" app:rowCount="1" app:columnCount="6" android:id="@+id/tapSection"
                 app:alignmentMode="alignMargins"
-                android:layout_gravity="center_horizontal" android:minHeight="50dp">
+                android:minHeight="50dp" >
 
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/button0"
-                    android:width="80dp"
                     android:height="20dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginStart="5dp" android:clickable="true" android:focusable="true"/>
+                    android:clickable="true" android:focusable="true" android:layout_marginRight="10px"/>
 
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/button1"
                     android:height="20dp"
-                    android:width="80dp"
-                    android:layout_marginStart="10dp" android:layout_marginEnd="2dp" android:clickable="true"
-                    android:focusable="true"/>
+                    android:clickable="true"
+                    android:focusable="true" android:layout_marginRight="10px"/>
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/button2"
                     android:height="20dp"
-                    android:width="80dp" android:layout_marginStart="10dp" android:layout_marginEnd="2dp"
-                    android:clickable="true" android:focusable="true"/>
+                    android:clickable="true" android:focusable="true" android:layout_marginRight="10px"/>
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/button3"
                     android:height="20dp"
-                    android:width="80dp"
-                    android:layout_marginStart="12dp" android:layout_marginEnd="2dp" android:clickable="true"
-                    android:focusable="true"/>
+                    android:clickable="true"
+                    android:focusable="true" android:layout_marginRight="10px"/>
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/button4"
-                    android:width="80dp"
-                    android:height="20dp" android:layout_marginStart="12dp" android:layout_marginEnd="2dp"
-                    android:clickable="true" android:focusable="true"/>/>
+                    android:height="20dp"
+                    android:clickable="true" android:focusable="true" android:layout_marginRight="10px"/>
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/button5"
-                    android:width="80dp" android:height="20dp"
-                    android:layout_marginStart="12dp" android:layout_marginEnd="2dp" android:clickable="true"
-                    android:focusable="true"/>
+                    android:height="20dp"
+                    android:clickable="true"
+                    android:focusable="true" android:layout_marginRight="10px"/>
         </androidx.gridlayout.widget.GridLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,8 +30,9 @@ public class Game {
         value = -1;
         currentTiles = new ArrayList<>();
         for (final Button b : columnButton) {
-            b.setBackgroundColor(Color.TRANSPARENT);
-            b.setWidth(180);
+            //b.setBackgroundColor(Color.TRANSPARENT);
+
+            //b.setWidth((int) Settings.tileWidth);
             b.cancelLongPress();
             b.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -40,11 +41,9 @@ public class Game {
                     char n = name.charAt(name.length() - 1);
                     if (currentTiles.size() >= 4) {
                         Tile t = new Tile(currentTiles.get(currentTiles.size() - 1).get(Integer.parseInt(String.valueOf(n))).isVisible());
-
                         if (t.isVisible()) {
                             value = 1;
                             currentTiles.get(currentTiles.size() - 1).get(Integer.parseInt(String.valueOf(n))).setVisible(false);
-                            System.out.println(value);
                         }
                     }
                 }
@@ -79,7 +78,7 @@ public class Game {
         }
     }
 
-    public synchronized int upgradeCharminCount() {
+    public int upgradeCharminCount() {
         return value;
 
     }
@@ -100,8 +99,8 @@ public class Game {
         soundMap = s.getSoundMap();
         ready=true;
     }
-
-    public ArrayList<ArrayList<Tile>> getAll() {
-        return soundMap;
+    public void setButtonWidth(int width){
+        for (Button b:columnButton)
+            b.setWidth(width);
     }
 }

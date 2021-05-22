@@ -16,8 +16,8 @@ import java.util.Arrays;
 public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
     public static String settingName = "TilesSurfaceSetting";
     public static int refresh = 330;
-    private SurfaceHolder surfaceHolder = null;
-    private Paint paint = null, bkgPaint = null;
+    private SurfaceHolder surfaceHolder;
+    private Paint paint, bkgPaint;
     private float tileX = 380, tileY = 0;
     private ArrayList<ArrayList<Tile>> tiles;
     private Thread gameThread;
@@ -49,6 +49,7 @@ public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callb
         int pos = preferences.getInt("position", 1);
         int id = this.getResources().getIdentifier("bkg" + pos, "drawable", context.getPackageName());
         bmp = BitmapFactory.decodeResource(getResources(), id);
+
 
     }
 
@@ -82,7 +83,7 @@ public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callb
     }
 
     public void drawTiles() {
-
+        paint.setColor(Color.BLACK);
         for (int k = 0; k < Settings.getInstance().getTileMovement() / Settings.fps / (Settings.getInstance().getDensity()); k++) {
             Canvas canvas = surfaceHolder.lockCanvas();
             canvas.drawBitmap(bmp, 0, 0, bkgPaint);
@@ -90,10 +91,8 @@ public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callb
                 for (int i = 0; i < tiles.size(); i++)
                     for (int j = 0; j < tiles.get(i).size(); j++) {
                         float increase = tiles.get(i).get(j).getSpeedAndIncrease();
-                        if (tiles.get(i).get(j).isVisible()) {
-                            paint.setColor(Color.BLACK);
-                            canvas.drawRect(tileX + (260 * j), (Settings.getInstance().getVerticalSpacing() * i) + increase, tileX + 240 + (260 * j), Settings.getInstance().getTileHeight() + (i * Settings.getInstance().getVerticalSpacing()) + increase, paint);
-                        }
+                        if (tiles.get(i).get(j).isVisible())
+                            canvas.drawRect(Settings.getInstance().getPaddingLeft() + (Settings.getInstance().getPaddingLeft() * j), (Settings.getInstance().getVerticalSpacing() * i) + increase, Settings.getInstance().getPaddingLeft() + Settings.tileWidth + (Settings.getInstance().getPaddingLeft() * j), Settings.tileHeight + (i * Settings.getInstance().getVerticalSpacing()) + increase, paint);
                     }
             surfaceHolder.unlockCanvasAndPost(canvas);
         }
@@ -103,16 +102,16 @@ public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callb
     public void run() {
         boolean stop = false;
         int time = preferences.getInt("Time", 0);
-        System.out.println(constraintLayout.getMeasuredHeight());
-        System.out.println(g.getAll());
         height = constraintLayout.getHeight();
         width = constraintLayout.getWidth();
         bmp = Bitmap.createScaledBitmap(bmp, width, height, false);
         Settings.getInstance().setSurfaceHeight(constraintLayout.getMeasuredHeight());
+        Settings.getInstance().setSurfaceWidth(constraintLayout.getMeasuredWidth());
         while (isRunning && !Settings.getInstance().pause()) {
             editor.putInt("Time", time);
-            editor.apply();
+            editor.commit();
             try {
+                drawTiles();
                 Thread.sleep(refresh);
                 if (time >= 5 && !tiles.isEmpty() && !stop) {
                     time = 4;
@@ -120,15 +119,9 @@ public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callb
                         if (tiles.get(tiles.size() - 1).get(i).isVisible())
                             g.lostTile();
                     tiles.remove(tiles.size() - 1);
-                } else if (stop) {
-                    time++;
-                    if (time == 4) break;
-                    else if (time > 0) {
-                        tiles.remove(tiles.size() - 1);
-                        tiles.add(0,new ArrayList<Tile>(Arrays.asList(new Tile(false), new Tile(false), new Tile(false), new Tile(false), new Tile(false), new Tile(false))));
-                    }
                 }
-                if (tiles.size() < 5 || tiles.isEmpty()) {
+                System.out.println(stop);
+                if (tiles.size() < 5 || tiles.isEmpty() && !stop) {
                     if (g.isAvailable(currentRow)) {
                         tiles.add(0, g.getRow(currentRow));
                         currentRow++;
@@ -136,29 +129,35 @@ public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callb
                         stop = true;
                         time = 0;
                     }
-                    for (int i = 0; i < tiles.size(); i++)
-                        for (int j = 0; j < tiles.get(i).size(); j++)
-                            tiles.get(i).get(j).resetIncrease();
-
                 }
+                if (stop) {
+                    if (!tiles.isEmpty())
+                        tiles.remove(tiles.size() - 1);
+                    if (time < 5) {
+                        tiles.add(0, new ArrayList<Tile>(Arrays.asList(new Tile(false), new Tile(false), new Tile(false), new Tile(false), new Tile(false), new Tile(false))));
+                    } else break;
+                }
+                for (int i = 0; i < tiles.size(); i++)
+                    for (int j = 0; j < tiles.get(i).size(); j++)
+                        tiles.get(i).get(j).resetIncrease();
+
                 g.setCurrentMap(tiles);
+
                 tiles = g.getCheckedTiles();
-                drawTiles();
                 time++;
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+
     }
 
     public void setLayout(ConstraintLayout layout) {
         constraintLayout = layout;
-
     }
 
     public void setGame(Game g) {
         this.g = g;
-        System.out.println(g.ready);
     }
 }
 
