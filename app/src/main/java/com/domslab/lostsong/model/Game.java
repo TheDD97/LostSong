@@ -30,9 +30,7 @@ public class Game {
         value = -1;
         currentTiles = new ArrayList<>();
         for (final Button b : columnButton) {
-            //b.setBackgroundColor(Color.TRANSPARENT);
-
-            //b.setWidth((int) Settings.tileWidth);
+            b.setBackgroundColor(Color.TRANSPARENT);
             b.cancelLongPress();
             b.setOnClickListener(new View.OnClickListener() {
                 @Override
