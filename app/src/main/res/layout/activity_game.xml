@@ -10,7 +10,7 @@
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" android:scrollbarAlwaysDrawHorizontalTrack="false"
+            android:layout_height="wrap_content"
             android:id="@+id/topSection" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/gameLayout" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -18,7 +18,7 @@
                 android:layout_width="80dp"
                 android:layout_height="match_parent" app:srcCompat="@drawable/music_note"
                 android:id="@+id/imageView2"
-                android:layout_weight="-1"/>
+                android:layout_weight="0" android:layout_marginBottom="5dp" android:layout_marginTop="5dp"/>
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
@@ -77,7 +77,7 @@
         <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" app:srcCompat="@android:drawable/ic_media_pause"
-                android:id="@+id/pauseButton" android:layout_weight="1"/>
+                android:id="@+id/pauseButton" android:layout_weight="0"/>
     </LinearLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:orientation="horizontal"

@@ -7,6 +7,8 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,13 +38,14 @@ public class GameScreen extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private GridLayout gridLayout;
     private boolean firstRun = true;
-
+    private Animation updateCounter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Settings.getInstance().gameOver(false);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         pauseButton = findViewById(R.id.pauseButton);
+        updateCounter= AnimationUtils.loadAnimation(this, R.anim.counter_animation);
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -175,7 +178,9 @@ public class GameScreen extends AppCompatActivity {
                             c++;
                             int th = Integer.parseInt(tilesHitted.getText().toString());
                             tilesHitted.setText(Integer.toString(++th));
+                            tilesHitted.setAnimation(updateCounter);
                             charmingCount.setText(Integer.toString(c));
+                            charmingCount.setAnimation(updateCounter);
                             Game.getInstance().restoreValue();
                         } else if (Game.getInstance().upgradeCharminCount() == -1)
                             charmingCount.setText(Integer.toString(0));
@@ -185,4 +190,6 @@ public class GameScreen extends AppCompatActivity {
         }
 
     }
+    @Override
+    public void onBackPressed() { }
 }
