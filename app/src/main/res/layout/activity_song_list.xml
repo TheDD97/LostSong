@@ -14,7 +14,13 @@
               android:fontFamily="@font/rocknroll_typo_regular"/>
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/song_list_view"
-            android:layout_weight="-1" android:background="#8B0B0909"/>
+            android:background="#8B0B0909">
+    </androidx.recyclerview.widget.RecyclerView>
+    <Button
+            android:text="How to Play?"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:id="@+id/howToPlay" android:background="@drawable/song_name"
+            android:fontFamily="@font/rocknroll_typo_regular" android:textStyle="bold"/>
 </LinearLayout>

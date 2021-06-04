@@ -2,8 +2,8 @@ package com.domslab.lostsong.view;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.view.View;
+import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -19,12 +19,11 @@ import adapters.SongAdapter;
 import java.util.ArrayList;
 
 public class SongList extends AppCompatActivity implements SongAdapter.OnSongListener {
-    //initialize variable
     RecyclerView recyclerView;
     ArrayList<SongCard> songCards;
     SongAdapter songAdapter;
     private DbManager db;
-
+    private Button howToPlayButton;
     private DbManager getDatabaseManager() {
         if (db == null)
             db = DbManager.getDatabase(this);
@@ -47,6 +46,14 @@ public class SongList extends AppCompatActivity implements SongAdapter.OnSongLis
             SongCard tmp = new SongCard(songLogo[i], songName[i]);
             songCards.add(tmp);
         }
+        howToPlayButton=findViewById(R.id.howToPlay);
+        howToPlayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), HowToPlay.class);
+                startActivity(intent);
+            }
+        });
         LinearLayoutManager layoutManager = new LinearLayoutManager(SongList.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());

@@ -26,6 +26,8 @@
         </activity>
         <activity android:name="com.domslab.lostsong.view.ScoreScreen" android:screenOrientation="sensorLandscape">
         </activity>
+        <activity android:name="com.domslab.lostsong.view.HowToPlay" android:screenOrientation="sensorLandscape" android:theme="@style/Theme.AppCompat.Translucent">
+        </activity>
     </application>
 
 </manifest>
