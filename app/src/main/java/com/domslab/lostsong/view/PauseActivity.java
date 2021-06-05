@@ -24,6 +24,7 @@ public class PauseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), SongList.class);
+                finishAffinity();
                 startActivity(intent);
             }
         });
@@ -37,6 +38,7 @@ public class PauseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), Home.class);
+                finishAffinity();
                 startActivity(intent);
             }
         });
@@ -48,6 +50,7 @@ public class PauseActivity extends AppCompatActivity {
                 editor.apply();
                 Settings.getInstance().gameOver(false);
                 Intent intent = new Intent(v.getContext(), GameScreen.class);
+                finishAffinity();
                 startActivity(intent);
             }
         });

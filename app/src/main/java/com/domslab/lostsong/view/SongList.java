@@ -24,6 +24,7 @@ public class SongList extends AppCompatActivity implements SongAdapter.OnSongLis
     SongAdapter songAdapter;
     private DbManager db;
     private Button howToPlayButton;
+
     private DbManager getDatabaseManager() {
         if (db == null)
             db = DbManager.getDatabase(this);
@@ -46,7 +47,7 @@ public class SongList extends AppCompatActivity implements SongAdapter.OnSongLis
             SongCard tmp = new SongCard(songLogo[i], songName[i]);
             songCards.add(tmp);
         }
-        howToPlayButton=findViewById(R.id.howToPlay);
+        howToPlayButton = findViewById(R.id.howToPlay);
         howToPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,4 +99,10 @@ public class SongList extends AppCompatActivity implements SongAdapter.OnSongLis
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
+    }
 }

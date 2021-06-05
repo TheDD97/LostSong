@@ -3,8 +3,11 @@ package com.domslab.lostsong.view;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Process;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -38,7 +41,7 @@ public class GameScreen extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private GridLayout gridLayout;
     private boolean firstRun = true;
-    private Animation updateCounter;
+    private Animation updateCounter,tilesHittedAnim;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Settings.getInstance().gameOver(false);
@@ -46,6 +49,7 @@ public class GameScreen extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         pauseButton = findViewById(R.id.pauseButton);
         updateCounter= AnimationUtils.loadAnimation(this, R.anim.counter_animation);
+
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,6 +116,12 @@ public class GameScreen extends AppCompatActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
+
+    @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(COUNTER_EXTRA, Integer.parseInt(charmingCount.getText().toString()));
@@ -147,7 +157,7 @@ public class GameScreen extends AppCompatActivity {
             super.run();
             while (!Settings.getInstance().pause()) {
                 try {
-                    sleep(10);
+                    sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -182,9 +192,12 @@ public class GameScreen extends AppCompatActivity {
                             charmingCount.setText(Integer.toString(c));
                             charmingCount.setAnimation(updateCounter);
                             Game.getInstance().restoreValue();
+
+
                         } else if (Game.getInstance().upgradeCharminCount() == -1)
                             charmingCount.setText(Integer.toString(0));
-                    }
+                        g.resetButtonColor();
+                            }
                 });
             }
         }

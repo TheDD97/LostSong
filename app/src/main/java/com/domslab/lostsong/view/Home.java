@@ -1,7 +1,8 @@
 package com.domslab.lostsong.view;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
+import android.os.Process;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.domslab.lostsong.model.SoundMapGenerator;
@@ -63,6 +65,7 @@ public class Home extends AppCompatActivity {
     }
 
     private void launchListActivity() {
+        finish();
         Intent intent = new Intent(this, SongList.class);
         startActivity(intent);
     }
@@ -112,6 +115,29 @@ public class Home extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
+    }
+
+    @Override
+    public void onBackPressed() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+        builder.setMessage("Do you want to exit?");
+        builder.setCancelable(true);
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+                Process.killProcess(Process.myPid());
+                System.exit(0);
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
 }

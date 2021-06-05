@@ -1,8 +1,13 @@
 package com.domslab.lostsong.model;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
+import com.example.lostsong.R;
 
 import java.util.ArrayList;
 
@@ -30,7 +35,7 @@ public class Game {
         value = -1;
         currentTiles = new ArrayList<>();
         for (final Button b : columnButton) {
-            b.setBackgroundColor(Color.TRANSPARENT);
+            b.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
             b.cancelLongPress();
             b.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -42,7 +47,9 @@ public class Game {
                         if (t.isVisible()) {
                             value = 1;
                             currentTiles.get(currentTiles.size() - 1).get(Integer.parseInt(String.valueOf(n))).setVisible(false);
+                            b.setBackgroundTintList(ColorStateList.valueOf(Color.GREEN));
                         }
+
                     }
                 }
             });
@@ -85,7 +92,8 @@ public class Game {
         value = 0;
     }
 
-    public void lostTile() {
+    public void lostTile(int i) {
+        columnButton.get(i).setBackgroundTintList(ColorStateList.valueOf(Color.RED));
         value = -1;
     }
 
@@ -93,12 +101,18 @@ public class Game {
         return currentTiles;
     }
 
-    public void setSong(Song s){
+    public void setSong(Song s) {
         soundMap = s.getSoundMap();
-        ready=true;
+        ready = true;
     }
-    public void setButtonWidth(int width){
-        for (Button b:columnButton)
+
+    public void setButtonWidth(int width) {
+        for (Button b : columnButton)
             b.setWidth(width);
+    }
+
+    public void resetButtonColor() {
+        for (Button b:columnButton)
+            b.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
     }
 }

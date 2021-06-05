@@ -117,7 +117,7 @@ public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callb
                     time = 4;
                     for (int i = 0; i < tiles.get(tiles.size() - 1).size(); i++)
                         if (tiles.get(tiles.size() - 1).get(i).isVisible())
-                            g.lostTile();
+                            g.lostTile(i);
                     tiles.remove(tiles.size() - 1);
                 }
                 System.out.println(stop);

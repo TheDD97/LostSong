@@ -40,6 +40,7 @@ public class ScoreScreen extends AppCompatActivity {
                 editor.putInt("Time", 0);
                 editor.apply();
                 Intent intent = new Intent(v.getContext(), GameScreen.class);
+                finishAffinity();
                 startActivity(intent);
             }
         });
@@ -47,6 +48,7 @@ public class ScoreScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), SongList.class);
+                finishAffinity();
                 startActivity(intent);
             }
         });
@@ -73,6 +75,8 @@ public class ScoreScreen extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
     }
+
     @Override
-    public void onBackPressed() { }
+    public void onBackPressed() {
+    }
 }
