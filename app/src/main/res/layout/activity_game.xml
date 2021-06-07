@@ -15,10 +15,11 @@
             app:layout_constraintBottom_toTopOf="@+id/gameLayout" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent">
         <ImageView
-                android:layout_width="80dp"
-                android:layout_height="match_parent" app:srcCompat="@drawable/music_note"
+                android:layout_width="50dp"
+                android:layout_height="match_parent" app:srcCompat="@drawable/music_note2"
                 android:id="@+id/imageView2"
-                android:layout_weight="0" android:layout_marginBottom="5dp" android:layout_marginTop="5dp"/>
+                android:layout_weight="0" android:layout_marginBottom="5dp" android:layout_marginTop="5dp"
+                android:cropToPadding="false" android:paddingRight="5dp" android:paddingStart="5dp"/>
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
@@ -76,8 +77,8 @@
         </LinearLayout>
         <ImageButton
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" app:srcCompat="@android:drawable/ic_media_pause"
-                android:id="@+id/pauseButton" android:layout_weight="0"/>
+                android:layout_height="wrap_content" app:srcCompat="@drawable/ic_baseline_settings_24"
+                android:id="@+id/pauseButton" android:layout_weight="0" android:backgroundTint="@color/trasparent"/>
     </LinearLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:orientation="horizontal"
