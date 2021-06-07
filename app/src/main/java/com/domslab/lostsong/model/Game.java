@@ -93,7 +93,7 @@ public class Game {
     }
 
     public void lostTile(int i) {
-        columnButton.get(i).setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+        columnButton.get(i).setBackgroundTintList(ColorStateList.valueOf(Color.rgb(128,0,0)));
         value = -1;
     }
 
