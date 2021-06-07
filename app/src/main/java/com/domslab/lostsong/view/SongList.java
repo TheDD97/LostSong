@@ -40,8 +40,8 @@ public class SongList extends AppCompatActivity implements SongAdapter.OnSongLis
         SharedPreferences.Editor editor = getSharedPreferences(TilesSurfaceView.settingName, MODE_PRIVATE).edit();
         editor.putInt("Time", 0);
         editor.apply();
-        Integer[] songLogo = {R.drawable.dream, R.drawable.mg, R.drawable.fairy_tail, R.drawable.me3, R.drawable.vivy,R.drawable.dragon_quest,R.drawable.black_clover,R.drawable.edens_zero};
-        String[] songName = {"Dream", "Megalovania", "Fairy tail main theme", "An end once and for all", "Vivy fluorite eyes song","Dragon quest Opening 2020","Haruka Mirai","Edens through the rough"};
+        Integer[] songLogo = {R.drawable.dream, R.drawable.mg, R.drawable.fairy_tail, R.drawable.me3, R.drawable.vivy,R.drawable.dragon_quest,R.drawable.black_clover,R.drawable.edens_zero,R.drawable.sao_alicization};
+        String[] songName = {"Dream", "Megalovania", "Fairy tail main theme", "An end once and for all", "Vivy fluorite eyes song","Dragon quest Opening 2020","Haruka Mirai","Edens through the rough","LiSA - ADAMAS"};
         songCards = new ArrayList<>();
         for (int i = 0; i < songLogo.length; i++) {
             SongCard tmp = new SongCard(songLogo[i], songName[i]);
