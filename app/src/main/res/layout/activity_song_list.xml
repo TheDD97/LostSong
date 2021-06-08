@@ -11,16 +11,17 @@
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:background="#8B0B0909">
+            android:layout_height="wrap_content" android:background="#8B0B0909" android:contextClickable="false">
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:text="@string/select_a_song" android:textSize="34sp" android:textStyle="bold"
                   android:textAlignment="center"
-                  android:fontFamily="@font/rocknroll_typo_regular" android:layout_weight="1"/>
+                  android:fontFamily="@font/rocknroll_typo_regular" android:layout_weight="1"
+                  android:layout_marginTop="5dp"/>
         <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" app:srcCompat="@drawable/ic_round_exit_to_app_24"
                 android:id="@+id/closeButton" android:layout_weight="0" android:layout_marginRight="10dp"
-        />
+                android:backgroundTint="#00FFFFFF"/>
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="wrap_content"
