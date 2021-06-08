@@ -6,4 +6,5 @@
     <string name="song_list">Go to song list</string>
     <string name="select_a_song">Select a song</string>
     <string name="howToPlay">Click on the rectangles below the yellow line when the black blocks are close to it</string>
+    <string name="how_to_play">How to Play?</string>
 </resources>
