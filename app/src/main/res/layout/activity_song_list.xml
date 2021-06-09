@@ -21,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" app:srcCompat="@drawable/ic_round_exit_to_app_24"
                 android:id="@+id/closeButton" android:layout_weight="0" android:layout_marginRight="10dp"
-                android:backgroundTint="#00FFFFFF"/>
+                android:backgroundTint="#00FFFFFF" android:contentDescription="TODO"/>
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="wrap_content"
