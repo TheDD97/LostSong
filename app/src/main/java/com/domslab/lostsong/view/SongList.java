@@ -23,9 +23,10 @@ import adapters.SongAdapter;
 import java.util.ArrayList;
 
 public class SongList extends AppCompatActivity implements SongAdapter.OnSongListener {
-    RecyclerView recyclerView;
-    ArrayList<SongCard> songCards;
-    SongAdapter songAdapter;
+    public final static String showTutorial = "Tutorial";
+    private RecyclerView recyclerView;
+    private ArrayList<SongCard> songCards;
+    private SongAdapter songAdapter;
     private DbManager db;
     private Button howToPlayButton;
     private ImageButton closeAppButton;
@@ -91,7 +92,14 @@ public class SongList extends AppCompatActivity implements SongAdapter.OnSongLis
 
             }
         });
-
+        SharedPreferences preferences = getSharedPreferences(showTutorial, MODE_PRIVATE);
+        if (preferences.getString("show", "yes").equals("yes")) {
+            SharedPreferences.Editor preferencesEditor = getSharedPreferences(showTutorial, MODE_PRIVATE).edit();
+            preferencesEditor.putString("show", "false");
+            preferencesEditor.apply();
+            Intent intent = new Intent(this, SongListHelp.class);
+            startActivity(intent);
+        }
     }
 
     @Override

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.domslab.lostsong.view.SongListHelp" android:orientation="vertical"
+        android:gravity="center_vertical" android:id="@+id/container">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:orientation="horizontal" android:background="#00FFFFFF">
+        <ImageView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content" app:srcCompat="@drawable/ic_arrow_back"
+                android:id="@+id/leftArrow"
+                android:layout_weight="0"/>
+        <TextView
+                android:text="Swipe horizontally to view the songs"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" android:id="@+id/textView3" android:layout_weight="1"
+                android:textAlignment="center" android:fontFamily="@font/rocknroll_typo_regular"
+                android:textSize="70px" android:background="@drawable/text_background"/>
+        <ImageView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content" app:srcCompat="@drawable/ic_arrow_forward"
+                android:id="@+id/rightArrow"
+                android:layout_weight="0"/>
+
+    </LinearLayout>
+    <TextView
+            android:text="Touch the screen to continue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/infoText" android:textAlignment="center"
+            android:fontFamily="@font/rocknroll_typo_regular" android:textSize="50px"/>
+</LinearLayout>
