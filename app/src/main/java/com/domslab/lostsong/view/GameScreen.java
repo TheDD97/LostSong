@@ -41,14 +41,15 @@ public class GameScreen extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private GridLayout gridLayout;
     private boolean firstRun = true;
-    private Animation updateCounter,tilesHittedAnim;
+    private Animation updateCounter, tilesHittedAnim;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Settings.getInstance().gameOver(false);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         pauseButton = findViewById(R.id.pauseButton);
-        updateCounter= AnimationUtils.loadAnimation(this, R.anim.counter_animation);
+        updateCounter = AnimationUtils.loadAnimation(this, R.anim.counter_animation);
 
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,12 +198,14 @@ public class GameScreen extends AppCompatActivity {
                         } else if (Game.getInstance().upgradeCharminCount() == -1)
                             charmingCount.setText(Integer.toString(0));
                         g.resetButtonColor();
-                            }
+                    }
                 });
             }
         }
 
     }
+
     @Override
-    public void onBackPressed() { }
+    public void onBackPressed() {
+    }
 }
