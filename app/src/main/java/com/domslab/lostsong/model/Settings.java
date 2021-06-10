@@ -9,7 +9,7 @@ public class Settings {
     public static float tileHeight;
     public static float tileWidth;
     public static float verticalSpacing;
-    public float surfaceHeight;
+    public float surfaceHeight = 0, surfaceWidth = 0;
     private float density;
     private float paddingLeft;
     private static Settings instance = null;
@@ -40,10 +40,12 @@ public class Settings {
     }
 
     public void setSurfaceHeight(float surfaceHeight) {
-        this.surfaceHeight = surfaceHeight;
-        tileHeight = 10 * density;
-        verticalSpacing = surfaceHeight / 5; //5 + il numero di righe mostrate per volta
-        tileMovement = verticalSpacing;
+        if (this.surfaceWidth == 0) {
+            this.surfaceHeight = surfaceHeight;
+            tileHeight = 10 * density;
+            verticalSpacing = surfaceHeight / 5; //5 + il numero di righe mostrate per volta
+            tileMovement = verticalSpacing;
+        }
     }
 
     public float getTileMovement() {
@@ -71,11 +73,19 @@ public class Settings {
     }
 
     public void setSurfaceWidth(float measuredWidth) {
-        paddingLeft = measuredWidth / 8;
-        tileWidth = paddingLeft - 10;
+        if (surfaceWidth == 0) {
+            surfaceWidth = measuredWidth;
+            paddingLeft = measuredWidth / 8;
+            tileWidth = paddingLeft - 10;
+        }
     }
 
     public float getPaddingLeft() {
         return paddingLeft;
     }
+
+    public float getSurfaceWidth() {
+        return surfaceWidth;
+    }
+
 }

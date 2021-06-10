@@ -23,7 +23,7 @@ public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callb
     private Thread gameThread;
     private int currentRow = 0;
     private ConstraintLayout constraintLayout;
-    private boolean isRunning;
+    private boolean isRunning, setbkg = false;
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     private Bitmap bmp;
@@ -102,11 +102,12 @@ public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callb
     public void run() {
         boolean stop = false;
         int time = preferences.getInt("Time", 0);
-        height = constraintLayout.getHeight();
-        width = constraintLayout.getWidth();
-        bmp = Bitmap.createScaledBitmap(bmp, width, height, false);
         Settings.getInstance().setSurfaceHeight(constraintLayout.getMeasuredHeight());
         Settings.getInstance().setSurfaceWidth(constraintLayout.getMeasuredWidth());
+        if (!setbkg) {
+            bmp = Bitmap.createScaledBitmap(bmp, (int) Settings.getInstance().getSurfaceWidth(), (int) Settings.getInstance().getSurfaceHeight(), false);
+            setbkg = true;
+        }
         while (isRunning && !Settings.getInstance().pause()) {
             editor.putInt("Time", time);
             editor.commit();
