@@ -13,7 +13,7 @@ public class Settings {
     private float density;
     private float paddingLeft;
     private static Settings instance = null;
-    public static int fps = 5;
+    public static int tileSpeed = 5;
     private boolean pause;
 
     public static Settings getInstance() {

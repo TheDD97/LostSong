@@ -22,7 +22,7 @@ public class Tile {
     public float getSpeedAndIncrease() {
         if (speed >= Settings.getInstance().getTileMovement())
             speed = 0;
-        return speed += Settings.fps * Settings.getInstance().getDensity();
+        return speed += Settings.tileSpeed * Settings.getInstance().getDensity();
     }
 
 

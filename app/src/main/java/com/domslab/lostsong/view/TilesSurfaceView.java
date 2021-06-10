@@ -84,7 +84,7 @@ public class TilesSurfaceView extends SurfaceView implements SurfaceHolder.Callb
 
     public void drawTiles() {
         paint.setColor(Color.BLACK);
-        for (int k = 0; k < Settings.getInstance().getTileMovement() / Settings.fps / (Settings.getInstance().getDensity()); k++) {
+        for (int k = 0; k < Settings.getInstance().getTileMovement() / Settings.tileSpeed / (Settings.getInstance().getDensity()); k++) {
             Canvas canvas = surfaceHolder.lockCanvas();
             canvas.drawBitmap(bmp, 0, 0, bkgPaint);
             if (!tiles.isEmpty())
