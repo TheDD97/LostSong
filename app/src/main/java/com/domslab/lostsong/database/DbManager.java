@@ -20,9 +20,6 @@ public abstract class DbManager extends RoomDatabase {
         return instance;
     }
 
-    private static void checkSong() {
-    }
-
     public static void destroyInstance() {
         instance = null;
     }

@@ -41,7 +41,7 @@ public class GameScreen extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private GridLayout gridLayout;
     private boolean firstRun = true;
-    private Animation updateCounter, tilesHittedAnim;
+    private Animation updateCounter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

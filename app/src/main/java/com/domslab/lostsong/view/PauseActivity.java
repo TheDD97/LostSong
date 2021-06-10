@@ -2,15 +2,22 @@ package com.domslab.lostsong.view;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.domslab.lostsong.database.DbManager;
+import com.domslab.lostsong.model.Game;
 import com.domslab.lostsong.model.Settings;
 import com.example.lostsong.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class PauseActivity extends AppCompatActivity {
+    private DbManager db;
+
+    private void getDatabaseManager() {
+        if (db == null)
+            db = DbManager.getDatabase(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +55,9 @@ public class PauseActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = getSharedPreferences(TilesSurfaceView.settingName, MODE_PRIVATE).edit();
                 editor.putInt("Time", 0);
                 editor.apply();
+                SharedPreferences preferences = getSharedPreferences(TilesSurfaceView.settingName, MODE_PRIVATE);
+                getDatabaseManager();
+                Game.getInstance().setSong(db.songModel().loadSong(String.valueOf(preferences.getInt("position", -1))));
                 Settings.getInstance().gameOver(false);
                 Intent intent = new Intent(v.getContext(), GameScreen.class);
                 finishAffinity();
